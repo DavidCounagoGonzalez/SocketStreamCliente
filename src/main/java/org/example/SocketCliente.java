@@ -2,10 +2,9 @@ package org.example;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
+
 
 public class SocketCliente {
 
@@ -44,5 +43,6 @@ public class SocketCliente {
             e.printStackTrace();
         }
     }
+    //https://stackoverflow.com/questions/8901637/re-use-a-java-socket-client-once-again
 }
 
