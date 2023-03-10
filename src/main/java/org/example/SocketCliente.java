@@ -1,37 +1,33 @@
 package org.example;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import javax.swing.*;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class SocketCliente {
+    static String username;
+    static OutputStream envia;
+    static InputStream recibe;
+
+    public static void Conexion(String ip, int port) throws IOException {
+        //Creando socket
+        Socket clientSocket=new Socket(ip, port);
+
+        envia= clientSocket.getOutputStream();
+        DataOutputStream envioData = new DataOutputStream(envia);
+
+        envioData.writeUTF(username);
+
+        System.out.println();
+    }
 
     public static void main(String[] args){
+        username = JOptionPane.showInputDialog("Indique su nombre de Usuario.");
+        new InterfazXat();
         try{
-            System.out.println("Creando socket cliente");
-            Socket clienteSocket=new Socket();
-            System.out.println("Estableciendo la conexi�n");
+            Conexion("10.0.9.15", 5555);
 
-            InetSocketAddress addr=new InetSocketAddress("localhost",5555);
-            clienteSocket.connect(addr);
-
-            InputStream is = clienteSocket.getInputStream();
-            OutputStream os= clienteSocket.getOutputStream();
-
-            System.out.println("Enviando mensaje");
-
-            String mensaje="mensaje desde el cliente";
-            os.write(mensaje.getBytes());
-
-            System.out.println("Mensaje enviado");
-
-            System.out.println("Cerrando el socket cliente");
-
-            clienteSocket.close();
-
-            System.out.println("Terminado");
 
         }catch (IOException e) {
             e.printStackTrace();
