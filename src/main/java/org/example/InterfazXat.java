@@ -2,8 +2,9 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.DataOutputStream;
 
-public class InterfazXat {
+public class InterfazXat{
 
     public static JButton btnEnviar, btnCerrar;
     public static JTextField txtEscribe;
@@ -30,20 +31,26 @@ public class InterfazXat {
         txtEscribe = new JTextField();
         txtEscribe.setBorder(BorderFactory.createMatteBorder(1,1,1,1, Color.BLACK));
         txtEscribe.setEditable(true);
-        txtEscribe.setBounds(40, 340,160,25);
+        txtEscribe.setBounds(40, 340,260,35);
 
         btnEnviar = new JButton("Enviar");
-        btnEnviar.setBounds(40,360, 160, 40);
+        btnEnviar.setBounds(340,340, 120, 40);
         btnEnviar.setToolTipText("Envia el mensaje escrito");
+        btnEnviar.addActionListener(act -> {
+            SocketCliente.envio();
+        });
 
         btnCerrar = new JButton("Cerrar");
-        btnCerrar.setBounds(70,400, 75,40);
+        btnCerrar.setBounds(200,400, 75,40);
         btnCerrar.setToolTipText("Cierra el chat");
+        btnCerrar.addActionListener(act -> {
+            SocketCliente.Salir();
+        });
 
         JPanel panel = new JPanel();
         panel.setOpaque(false);
         panel.setLayout(null);
-        panel.setBounds(0,0,500,600);
+        panel.setBounds(0,0,500,550);
         panel.add(lblTitulo);
         panel.add(scroll);
         panel.add(txtEscribe);
@@ -54,11 +61,15 @@ public class InterfazXat {
         frame.add(panel);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-        frame.setSize(500,600);
-        frame.setTitle("XAT");
+        frame.setSize(500,550);
+        frame.setTitle("Cliente");
         frame.setVisible(true);
         frame.setResizable(false);
 
+    }
+
+    public static void main(String[] args){
+        new InterfazXat();
     }
 }
 
