@@ -12,9 +12,11 @@ public class SocketCliente {
     static Socket sc;
     static String nombre;
 
-    public static void main(String[] args){
+    static HiloCliente hilo;
 
+    public static void main(String[] args){
         try {
+            new InterfazXat();
             sc = new Socket("127.0.0.1", 5554);
             System.out.println("aqui");
 
@@ -27,9 +29,7 @@ public class SocketCliente {
             nombre = JOptionPane.showInputDialog("Indique su nombre");
             out.writeUTF(nombre);
 
-            new InterfazXat();
-
-            HiloCliente hilo = new HiloCliente(sc);
+            hilo = new HiloCliente(sc);
             hilo.start();
 
         } catch (IOException e) {
@@ -43,9 +43,11 @@ public class SocketCliente {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             if(InterfazXat.txtEscribe.getText().equals("Cerrar")){
                 out.writeUTF(nombre + " se ha desconectado");
-                System.exit(0);
+                sc.close();
+                InterfazXat.frame.dispatchEvent(new WindowEvent(InterfazXat.frame, WindowEvent.WINDOW_CLOSING));
             }else {
                 out.writeUTF(nombre + " --> " + InterfazXat.txtEscribe.getText());
+                InterfazXat.chat.append(nombre + " --> " + InterfazXat.txtEscribe.getText() + "\n");
                 InterfazXat.txtEscribe.setText("");
             }
         } catch (IOException e) {
@@ -53,22 +55,26 @@ public class SocketCliente {
         }
     }
 
-    public static void recibo(){
+    /*public static boolean recibo(){
         try {
+            while(!sc.isClosed()) {
             InputStream dis = sc.getInputStream();
             DataInputStream is = new DataInputStream(dis);
             String recibido = is.readUTF();
-            InterfazXat.chat.append(recibido +"\n");
+            InterfazXat.chat.append(recibido + "\n");
+            }
         }catch(IOException exc){
             exc.printStackTrace();
         }
-    }
+        return false;
+    }*/
 
     public static void Salir(){
         try {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             out.writeUTF(nombre + " se ha desconectado");
-            System.exit(0);
+            sc.close();
+            InterfazXat.frame.dispatchEvent(new WindowEvent(InterfazXat.frame, WindowEvent.WINDOW_CLOSING));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
