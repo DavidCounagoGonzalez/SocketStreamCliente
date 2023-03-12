@@ -43,7 +43,6 @@ public class SocketCliente {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             if(InterfazXat.txtEscribe.getText().equals("Cerrar")){
                 out.writeUTF(nombre + " se ha desconectado");
-                sc.close();
                 InterfazXat.frame.dispatchEvent(new WindowEvent(InterfazXat.frame, WindowEvent.WINDOW_CLOSING));
             }else {
                 out.writeUTF(nombre + " --> " + InterfazXat.txtEscribe.getText());
@@ -73,7 +72,6 @@ public class SocketCliente {
         try {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             out.writeUTF(nombre + " se ha desconectado");
-            sc.close();
             InterfazXat.frame.dispatchEvent(new WindowEvent(InterfazXat.frame, WindowEvent.WINDOW_CLOSING));
         } catch (IOException e) {
             throw new RuntimeException(e);
