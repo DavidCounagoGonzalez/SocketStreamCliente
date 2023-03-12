@@ -28,7 +28,7 @@ public class HiloCliente extends Thread {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    System.out.println("Te has desconectado");
                 }
             }
 
