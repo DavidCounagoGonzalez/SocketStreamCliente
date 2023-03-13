@@ -15,9 +15,9 @@ public class InterfazXat{
 
     public InterfazXat(){
 
-        lblTitulo = new JLabel("XAT");
+        lblTitulo = new JLabel("CHAT MALITOS");
         lblTitulo.setFont(new Font("TimesRoman", Font.ITALIC, 25));
-        lblTitulo.setBounds(225,25,400,25);
+        lblTitulo.setBounds(150,25,400,25);
 
 
         chat = new JTextArea();

@@ -1,5 +1,7 @@
 package org.example;
 
+import javax.swing.*;
+import java.awt.event.WindowEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -23,7 +25,8 @@ public class HiloCliente extends Thread {
                     InterfazXat.chat.append(mensaje + "\n");
                 }
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                JOptionPane.showMessageDialog(null, "El servidor se ha desconectado");
+                InterfazXat.frame.dispatchEvent(new WindowEvent(InterfazXat.frame, WindowEvent.WINDOW_CLOSING));
             }finally {
                 try {
                     in.close();

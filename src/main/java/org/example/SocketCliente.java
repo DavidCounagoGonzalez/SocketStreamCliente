@@ -33,7 +33,10 @@ public class SocketCliente {
             hilo.start();
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "No hemos encontrado el server." +
+                    "\n Cerrando...");
+            InterfazXat.frame.dispatchEvent(new WindowEvent(InterfazXat.frame, WindowEvent.WINDOW_CLOSING));
+
         }
 
     }
