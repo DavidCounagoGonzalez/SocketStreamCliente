@@ -42,11 +42,11 @@ public class SocketCliente {
         try {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             if(InterfazXat.txtEscribe.getText().equals("Cerrar")){
-                out.writeUTF(nombre + " se ha desconectado");
+                out.writeUTF(nombre + "--> se ha desconectado");
                 InterfazXat.frame.dispatchEvent(new WindowEvent(InterfazXat.frame, WindowEvent.WINDOW_CLOSING));
             }else {
-                out.writeUTF(nombre + " --> " + InterfazXat.txtEscribe.getText());
-                InterfazXat.chat.append(nombre + " --> " + InterfazXat.txtEscribe.getText() + "\n");
+                out.writeUTF(nombre + "--> " + InterfazXat.txtEscribe.getText());
+                InterfazXat.chat.append(nombre + "--> " + InterfazXat.txtEscribe.getText() + "\n");
                 InterfazXat.txtEscribe.setText("");
             }
         } catch (IOException e) {
@@ -54,24 +54,10 @@ public class SocketCliente {
         }
     }
 
-    /*public static boolean recibo(){
-        try {
-            while(!sc.isClosed()) {
-            InputStream dis = sc.getInputStream();
-            DataInputStream is = new DataInputStream(dis);
-            String recibido = is.readUTF();
-            InterfazXat.chat.append(recibido + "\n");
-            }
-        }catch(IOException exc){
-            exc.printStackTrace();
-        }
-        return false;
-    }*/
-
     public static void Salir(){
         try {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            out.writeUTF(nombre + " se ha desconectado");
+            out.writeUTF(nombre + "--> se ha desconectado");
             InterfazXat.frame.dispatchEvent(new WindowEvent(InterfazXat.frame, WindowEvent.WINDOW_CLOSING));
         } catch (IOException e) {
             throw new RuntimeException(e);
