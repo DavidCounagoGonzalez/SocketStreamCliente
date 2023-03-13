@@ -58,6 +58,7 @@ public class InterfazXat{
         panel.add(btnCerrar);
 
         frame = new JFrame();
+        frame.getRootPane().setDefaultButton(btnEnviar);
         frame.add(panel);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
